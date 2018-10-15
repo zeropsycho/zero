@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.zero.demo.dao.SimpleDao">
+    <resultMap id="simpleMap" type="cn.zero.demo.entity.Simple">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+    </resultMap>
+    
+    <select id="simpleList" resultMap="simpleMap" parameterType="Simple">
+        SELECT * FROM simple
+        where 1=1
+        <if test="name != null and name != ''">
+            AND `name` LIKE "%"#{name, jdbcType=VARCHAR}"%"
+        </if>
+    </select>
+</mapper>
